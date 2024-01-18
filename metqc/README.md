@@ -10,19 +10,11 @@
 The goal of MetQC is to provide Quartet-based QCtools for Metabolomics.
 
 ## Installation
-
-You can install the released version of MetQC from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("MetQC")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install this packages from github
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("chinese-quartet/MetQC")
+devtools::install_github("markx945/MetQC/metqc")
 ```
 
 ## Example
@@ -31,7 +23,7 @@ devtools::install_github("chinese-quartet/MetQC")
 library(MetQC)
 ## Get performance report for metabolomics data
 ### The result document was outputed to "output" directory under the working directory
-GetPerformance(dt=sample_data,metadata=sample_metadata)
+GetPerformance(dt.path=sample_data,metadata=sample_metadata)
 
 ## Count SNR and plot related PCA plot
 CountSNR(dt=sample_data,metadata=sample_metadata)
@@ -45,9 +37,23 @@ CountRC(dt=sample_data,metadata=sample_metadata)
 CountRecall(dt=sample_data,metadata=sample_metadata)
 #> [1] 0.1649485
 
+#### generate report
+### get example data and reprot template path
+example_sample <- system.file("extdata","sample_data.csv",package = "MetQC")
+example_metadata <- system.file("extdata","sample_metadata.csv",package = "MetQC")
+doc_file <- system.file("extdata","Quartet_temp.docx",package = "MetQC")
+
+### get metabolomics metrics data and generate report
+met_result = GetPerformance(dt.path = example_sample,metadata.path = example_metadata)
+GenerateReport(Met_result = met_result,doc_file_path = doc_file,output_path = './')
+
+
 ### The output directory can also be assigned.
 # GetPerformance(output.path = [Your Path],dt=sample_data,metadata=sample_metadata)
 # CountSNR(output.path = [Your Path],dt=sample_data,metadata=sample_metadata)
 # CountRC(output.path = [Your Path],dt=sample_data,metadata=sample_metadata)
 # CountRecall(output.path = [Your Path],dt=sample_data,metadata=sample_metadata)
+
 ```
+
+
