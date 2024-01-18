@@ -34,7 +34,21 @@ GetPerformance <- function(dt.path=NULL, metadata.path=NULL, output.path = NULL,
     
     metadata <- metadata[metadata$sample %in% c("D5","D6","F7","M8"),]
     cols <- c("metabolites","HMDBID",metadata$col_names)
-    dt <- dt[,..cols]
+    
+    ### check input
+    # 检查列名是否存在于dt中
+    if(!all(cols %in% colnames(dt))) {
+      missing_cols <- cols[!cols %in% colnames(dt)]
+      stop("The following columns are missing in 'dt': ", paste(missing_cols, collapse = ", "),". Please check your data format and keep it identical with our example data.")
+    }
+    
+    # 尝试选择列，并在错误时停止执行
+    dt <- tryCatch({
+      dt[, ..cols]
+    }, error = function(e) {
+      stop("Error in selecting columns: ", e$message)
+    })
+    
     
     SNR <- CountSNR(dt=dt,metadata=metadata,output.path = output.path)
     RC <- CountRC(dt=dt,metadata=metadata,output.path = output.path)
