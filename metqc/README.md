@@ -23,7 +23,7 @@ devtools::install_github("markx945/MetQC/metqc")
 library(MetQC)
 ## Get performance report for metabolomics data
 ### The result document was outputed to "output" directory under the working directory
-GetPerformance(dt.path=sample_data,metadata=sample_metadata)
+GetPerformance(dt.path=sample_data,metadata.path=sample_metadata)
 
 ## Count SNR and plot related PCA plot
 CountSNR(dt=sample_data,metadata=sample_metadata)
