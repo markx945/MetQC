@@ -107,14 +107,23 @@ GenerateReport <- function(Met_result = NULL, doc_file_path = NULL, output_path 
   
   
   #### 设置输出文本
-  ### Evaluate Metrics
+  
+  ###### 第一部分 
+  ### Assessment Summary 
+  
+  
+  
   text_1 = "The performance of the submitted data will be graded as Bad, Fair, Good, or Great based on the ranking by comparing the total score with the historical datasets.The total score is the geometric mean of the scaled values of the number of Signal-to-Noise Ratio (SNR), relative correlation with reference datasets (RC), and recall of DAMs in Reference Datasets (Recall)."
   ### Four levels of performance
   text_1_sup_1 = "Based on the scaled total score, the submitted data will be ranked together with all Quartet historical datasets. The higher the score, the higher the ranking. After this, the performance levels will be assigned based on their ranking ranges."
-  text_1_sup_2 = "Bad - the bottom 20%."
-  text_1_sup_3 = "Fair - between bottom 20% and median 50%."
-  text_1_sup_4 = "Good - between median 50% and top 20%."
-  text_1_sup_5 = "Great - the top 20%."
+  text_1_sup_2 = "  Bad - the bottom 20%."
+  text_1_sup_3 = "  Fair - between bottom 20% and median 50%."
+  text_1_sup_4 = "  Good - between median 50% and top 20%."
+  text_1_sup_5 = "  Great - the top 20%."
+  
+  
+  #### 第二部分 Quality control metric
+  
   
   ### Performance Score
   text_2 = "Scores of evaluation metrics for the current batch and all historical batches assessed.Please note that the results shown here are scaled values for all batches in each metric. The name of your data is Queried_Data."
@@ -124,9 +133,13 @@ GenerateReport <- function(Met_result = NULL, doc_file_path = NULL, output_path 
   text_4 = "Relative correlation with reference datasets metric which was representing the numerical consistency of the relative expression profiles."
   
   ### Method
-  supplementary_info_1_1 = "1. Signal-to-Noise Ratio (SNR): We apply SNR in the reliability assessment of metabolome data based on the built-in biological differences between Quartet samples. SNR is the fraction of distances between different Quartet samples ('signal') and distances between technical replicates ('noise') on 2D-PCA scatter plot, where a high SNR indicates the tight clustering of technical and wide dispersion of different Quartet samples replicates, as well as good reproducibility and discriminability overall the batch level."
-  supplementary_info_1_2 = "2. Relative Correlation with Reference Datasets (RC): RC is used for assessment of quantitative consistency with the reference datasets (RDs) at relative levels. To evaluate the performance of both targeted and untargeted metabolomics, the RDs were established with historical datasets of high quality by benchmarking the relative abundance values for each sample pair (D5/D6, F7/D6, M8/D6) at metabolite abundance level. We calculate relative abundance values (ratios to D6) of the queried data for metabolites overlapped with the RDs. Then we calculate the Pearson correlation as RC of measured relative abundance values and those in the RDs.\n"
-  supplementary_info_1_3 = "3. Recall of DAMs in Reference Datasets (Recall): Recall is used for qualitative assessment of the accuracy of biological difference detecting, as the fraction of the differential abundancial metabolites (DAMs) in RDs that are successfully retrieved. Here recall is the number of measured DAMs (p < 0.05, t test) divided by the number of DAMs should be identified as RDs."
+  supplementary_info_1_1 = "We apply SNR in the reliability assessment of metabolome data based on the built-in biological differences between Quartet samples. SNR is the fraction of distances between different Quartet samples ('signal') and distances between technical replicates ('noise') on 2D-PCA scatter plot, where a high SNR indicates the tight clustering of technical and wide dispersion of different Quartet samples replicates, as well as good reproducibility and discriminability overall the batch level."
+  supplementary_info_1_2 = "RC is used for assessment of quantitative consistency with the reference datasets (RDs) at relative levels. To evaluate the performance of both targeted and untargeted metabolomics, the RDs were established with historical datasets of high quality by benchmarking the relative abundance values for each sample pair (D5/D6, F7/D6, M8/D6) at metabolite abundance level. We calculate relative abundance values (ratios to D6) of the queried data for metabolites overlapped with the RDs. Then we calculate the Pearson correlation as RC of measured relative abundance values and those in the RDs."
+  supplementary_info_1_3 = "Recall is used for qualitative assessment of the accuracy of biological difference detecting, as the fraction of the differential abundancial metabolites (DAMs) in RDs that are successfully retrieved. Here recall is the number of measured DAMs (p < 0.05, t test) divided by the number of DAMs should be identified as RDs."
+  
+  ### Reference
+  supplementary_info_ref1 <- "1. Zheng, Y. et al. Multi-omics data integration using ratio-based quantitative profiling with Quartet reference materials. Nature Biotechnology 1–17 (2023)."
+  supplementary_info_ref2 <- "2. Zhang, N. et al. Quartet metabolite reference materials for assessing inter-laboratory reliability and data integration of metabolomic profiling. bioRxiv 2022.11. 01.514762 (2022)."
   
   ###Contact us
   supplementary_info_2_1 = "Fudan University Pharmacogenomics Research Center"
@@ -146,20 +159,33 @@ GenerateReport <- function(Met_result = NULL, doc_file_path = NULL, output_path 
     ## 添加报告标题
     body_add_par(value = "Quartet Report for Metabolomics", style = "heading 1") %>% 
     
-    ## 评估总结
+    ## 第一部分，Assessment Summary
     body_add_par(value = "Assessment Summary", style = "heading 2") %>% 
-    body_add_par(value = "Evaluate Metrics", style = "heading 3") %>%
     body_add_flextable(ft1) %>%
+    body_add_break()%>%
+    
+    
+    ### 第二部分 Quality control metric
+    body_add_par(value = "Quality Control Metric", style = "heading 2") %>%
+    body_add_par(value = "Signal-to-Noise Ratio (SNR):",style = "heading 3") %>%
+    body_add_par(value = supplementary_info_1_1,style = "Normal") %>%
+    body_add_par(value = "Relative Correlation with Reference Datasets (RC):",style = "heading 3") %>%
+    body_add_par(value = supplementary_info_1_2,style = "Normal") %>%
+    body_add_par(value = "Recall of DAMs in Reference Datasets (Recall):",style = "heading 3") %>%
+    body_add_par(value = supplementary_info_1_3,style = "Normal") %>%
+    body_add_par(value = "Total Score:",style = "heading 3") %>%
     body_add_par(value = text_1,style = "Normal") %>%
-    body_add_par(value = "Four levels of performance",style = "heading 4") %>%
+    body_add_par(value = "Four levels of performance:",style = "heading 3") %>%
     body_add_par(value = text_1_sup_1,style = "Normal") %>%
     body_add_par(value = text_1_sup_2,style = "Normal") %>%
     body_add_par(value = text_1_sup_3,style = "Normal") %>%
     body_add_par(value = text_1_sup_4,style = "Normal") %>%
     body_add_par(value = text_1_sup_5,style = "Normal") %>%
     
+    
+    
     ### 排名散点图
-    body_add_par(value = "Performance Score", style = "heading 3") %>%
+    body_add_par(value = "Performance Score", style = "heading 2") %>%
     body_add_gg(value = p_rank_scatter_plot,style = "centered") %>%
     body_add_par(value = text_2,style = "Normal") %>%
     
@@ -183,11 +209,15 @@ GenerateReport <- function(Met_result = NULL, doc_file_path = NULL, output_path 
     body_add_break()%>%
     
     ### 附加信息
-    body_add_par(value = "Supplementary information", style = "heading 2") %>%
-    body_add_par(value = "Method", style = "heading 3") %>%
-    body_add_par(value = supplementary_info_1_1, style = "Normal") %>%
-    body_add_par(value = supplementary_info_1_2, style = "Normal") %>%
-    body_add_par(value = supplementary_info_1_3, style = "Normal") %>%
+    body_add_par(value = "Supplementary Information", style = "heading 2") %>%
+    # body_add_par(value = "Method", style = "heading 3") %>%
+    # body_add_par(value = supplementary_info_1_1, style = "Normal") %>%
+    # body_add_par(value = supplementary_info_1_2, style = "Normal") %>%
+    # body_add_par(value = supplementary_info_1_3, style = "Normal") %>%
+    
+    body_add_par(value = "Reference", style = "heading 3") %>%
+    body_add_par(value = supplementary_info_ref1, style = "Normal") %>%
+    body_add_par(value = supplementary_info_ref2, style = "Normal") %>%
     body_add_par(value = "Contact us", style = "heading 3") %>%
     body_add_par(value = supplementary_info_2_1, style = "Normal") %>%
     body_add_par(value = supplementary_info_2_2, style = "Normal") %>%
