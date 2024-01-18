@@ -10,7 +10,7 @@
 The goal of MetQC is to provide Quartet-based QCtools for Metabolomics.
 
 ## Installation
-You can install this packages from github
+You can install this package from github
 
 ``` r
 # install.packages("devtools")
