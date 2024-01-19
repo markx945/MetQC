@@ -45,7 +45,7 @@ doc_file <- system.file("extdata","Quartet_temp.docx",package = "MetQC")
 
 ### get metabolomics metrics data and generate report
 met_result = GetPerformance(dt.path = example_sample,metadata.path = example_metadata)
-GenerateReport(Met_result = met_result,doc_file_path = doc_file,output_path = './')
+GenerateMetReport(Met_result = met_result,doc_file_path = doc_file,output_path = './')
 
 
 ### The output directory can also be assigned.
