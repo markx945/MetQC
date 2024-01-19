@@ -14,7 +14,7 @@ You can install this package from github
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("markx945/MetQC"，subdir="metqc")
+devtools::install_github("markx945/MetQC",subdir="metqc")
 ```
 
 ## Example
