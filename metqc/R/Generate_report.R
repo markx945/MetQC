@@ -175,7 +175,7 @@ GenerateReport <- function(Met_result = NULL, doc_file_path = NULL, output_path 
     body_add_par(value = supplementary_info_1_3,style = "Normal") %>%
     body_add_par(value = "Total Score:",style = "heading 3") %>%
     body_add_par(value = text_1,style = "Normal") %>%
-    body_add_par(value = "Four levels of performance:",style = "heading 3") %>%
+    body_add_par(value = "Performance Category:",style = "heading 3") %>%
     body_add_par(value = text_1_sup_1,style = "Normal") %>%
     body_add_par(value = text_1_sup_2,style = "Normal") %>%
     body_add_par(value = text_1_sup_3,style = "Normal") %>%
