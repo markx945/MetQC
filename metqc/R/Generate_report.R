@@ -53,7 +53,7 @@
 #' 
 
 
-GenerateReport <- function(Met_result = NULL, doc_file_path = NULL, output_path = NULL) {
+GenerateMetReport <- function(Met_result = NULL, doc_file_path = NULL, output_path = NULL) {
   
   if(is.null(Met_result) || is.null(doc_file_path)) {
     stop("All arguments (Met_result, doc_file_path) are required.")
