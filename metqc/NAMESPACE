@@ -3,7 +3,7 @@
 export(CountRC)
 export(CountRecall)
 export(CountSNR)
-export(GenerateReport)
+export(GenerateMetReport)
 export(GetPerformance)
 export(MapIDs)
 importFrom(data.table,":=")
