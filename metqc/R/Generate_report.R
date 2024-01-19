@@ -116,10 +116,10 @@ GenerateMetReport <- function(Met_result = NULL, doc_file_path = NULL, output_pa
   text_1 = "The performance of the submitted data will be graded as Bad, Fair, Good, or Great based on the ranking by comparing the total score with the historical datasets.The total score is the geometric mean of the scaled values of the number of Signal-to-Noise Ratio (SNR), relative correlation with reference datasets (RC), and recall of DAMs in Reference Datasets (Recall)."
   ### Four levels of performance
   text_1_sup_1 = "Based on the scaled total score, the submitted data will be ranked together with all Quartet historical datasets. The higher the score, the higher the ranking. After this, the performance levels will be assigned based on their ranking ranges."
-  text_1_sup_2 = "  Bad - the bottom 20%."
-  text_1_sup_3 = "  Fair - between bottom 20% and median 50%."
-  text_1_sup_4 = "  Good - between median 50% and top 20%."
-  text_1_sup_5 = "  Great - the top 20%."
+  text_1_sup_2 = "· Bad - the bottom 20%."
+  text_1_sup_3 = "· Fair - between bottom 20% and median 50%."
+  text_1_sup_4 = "· Good - between median 50% and top 20%."
+  text_1_sup_5 = "· Great - the top 20%."
   
   
   #### 第二部分 Quality control metric
