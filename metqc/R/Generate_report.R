@@ -46,7 +46,7 @@
 #' output_path_example <- getwd()
 #'
 #' # 运行函数
-#' GenerateReport(Met_result=met_result, doc_file_path=doc_file_path_example, output_path=output_path_example)
+#' GenerateMetReport(Met_result=met_result, doc_file_path=doc_file_path_example, output_path=output_path_example)
 #'
 #'
 #' @export
